@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:video_player_app/home_page.dart';
+import 'package:video_player_app/video_info.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: VideoInfo(),
     );
   }
 }
