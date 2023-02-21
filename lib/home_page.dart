@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:video_player_app/colors.dart';
+import 'package:video_player_app/video_info.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,7 +14,10 @@ class _HomePageState extends State<HomePage> {
   List info=[];
   _initData(){
     DefaultAssetBundle.of(context).loadString("json/info.json").then((value){
-     info=json.decode(value);
+        setState(() {
+             info=json.decode(value);
+
+        });
     });
   }
 @override
@@ -76,20 +81,32 @@ void initState() {
                       fontWeight: FontWeight.w700),
                 ),
                 Expanded(child: Container()),
-                Text(
-                  "Details",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: AppColor.homePageDetail,
+                InkWell(
+                   onTap: (){
+                    Get.to(()=>VideoInfo());
+                  },
+
+                  child: Text(
+                    "Details",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: AppColor.homePageDetail,
+                    ),
                   ),
                 ),
                 SizedBox(
                   width: 5,
                 ),
-                Icon(
-                  Icons.arrow_forward,
-                  size: 20,
-                  color: AppColor.homePageIcons,
+                InkWell(
+                  onTap: (){
+                    Get.to(()=>VideoInfo());
+                  },
+
+                  child: Icon(
+                    Icons.arrow_forward,
+                    size: 20,
+                    color: AppColor.homePageIcons,
+                  ),
                 )
               ],
             ),
