@@ -13,7 +13,7 @@ class VideoInfo extends StatefulWidget {
 class _VideoInfoState extends State<VideoInfo> {
   List videoInfo = [];
   bool _playArea=false;
-  late VideoPlayerController _controller;
+   VideoPlayerController? _controller;
   _initData() async {
     await DefaultAssetBundle.of(context)
         .loadString("json/videoinfo.json")
@@ -369,13 +369,13 @@ class _VideoInfoState extends State<VideoInfo> {
     );
   }
   _onTapVideo(int index){
-    final controller =VideoPlayerController.network(videoInfo[index]["videoUrl"]);
+    final controller =VideoPlayerController.network(videoInfo[1]["videoUrl"]);
     _controller=controller;
     setState(() {
       
     });
     controller..initialize().then((_){
-      _controller.play();
+      _controller?.play();
       setState(() {
         
       });
@@ -384,13 +384,20 @@ class _VideoInfoState extends State<VideoInfo> {
  Widget _playView(BuildContext context){
    final controller=_controller;
    if(controller!=null&&controller.value.isInitialized){
-    return Container(
-      height: 300,
-      width: 300,
+    return AspectRatio(
+       aspectRatio: 16/9,
       child: VideoPlayer(controller),
     );
    }else{
-     return Text("Being initialized pls wait");
+     return AspectRatio(
+      aspectRatio: 16/9,
+      child: Center(child: Text("Preparing...",
+      style: TextStyle(
+        fontSize: 20,
+        color: Colors.white60,
+      ),
+      
+      )));
    }
   }
 }
